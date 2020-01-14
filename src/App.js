@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import './style.css';
+import API from './api/api'
 
 import Header from './components/Header'
 import Quiz from './components/Quiz'
 import Result from './components/Result';
-import quizQuestions from './api/api';
+// import quizQuestions from './api/api';
 import Footer from './components/Footer';
 
 
@@ -26,6 +27,8 @@ class App extends Component {
   };
 
   componentDidMount() {
+    API.getDataFromDb();
+    
     const shuffledAnswerOptions = quizQuestions.map((question) => this.shuffleArray(question.answers));  
   
     this.setState({

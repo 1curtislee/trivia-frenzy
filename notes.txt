@@ -1,0 +1,4 @@
+someone functionality 
+hindered because of db insertion. 
+Must rewrite functions in App.js and 
+api.js to retrieve db data properly. 
