@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const express = require('express');
 var cors = require('cors');
 const bodyParser = require('body-parser');
-const logger = require('morgan');
-// const Model = require('./src/api/Model');
+
+const QuestionModel = require('./Model');
 
 const API_PORT = 3001;
 const app = express();
@@ -12,11 +12,12 @@ const router = express.Router();
 
 // this is our MongoDB database
 const dbRoute =
-  'mongodb://heroku_81hwr9dc:b4h84mp6gl3n7enkpdgiko35qu@ds133252.mlab.com:33252/heroku_81hwr9dc';
+  'mongodb://heroku_81hwr9dc:b4h84mp6gl3n7enkpdgiko35qu@ds133252.mlab.com:33252/heroku_81hwr9dc'
 
 // connects our back end code with the database
-mongoose.connect(dbRoute, { useNewUrlParser: true });
-
+mongoose.connect(dbRoute, { 
+  useNewUrlParser: true,
+  useUnifiedTopology: true });
 let db = mongoose.connection;
 
 db.once('open', () => console.log('connected to the database'));
@@ -28,14 +29,16 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 // bodyParser, parses the request body to be a readable json format
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(logger('dev'));
 
 // this is our get method
 // this method fetches all available data in our database
 router.get('/getData', (req, res) => {
-  Data.find((err, data) => {
-    if (err) return res.json({ success: false, error: err });
-    return res.json({ success: true, data: data });
+  QuestionModel.find((err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json(data);
+    }
   });
 });
 
@@ -62,7 +65,9 @@ router.delete('/deleteData', (req, res) => {
 // this is our create methid
 // this method adds new data in our database
 router.post('/putData', (req, res) => {
-  let data = new Data();
+  res.send('post route hit!')
+  
+  let data = new QuestionModel();
 
   const { id, message } = req.body;
 
@@ -72,7 +77,7 @@ router.post('/putData', (req, res) => {
       error: 'INVALID INPUTS',
     });
   }
-  data.message = message;
+  data.question = question;
   data.id = id;
   data.save((err) => {
     if (err) return res.json({ success: false, error: err });

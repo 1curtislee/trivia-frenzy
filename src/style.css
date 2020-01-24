@@ -1,45 +1,19 @@
 .App {
-  text-align: center;
+  text-align: center !important;
   width: 100%;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #0f5f8d;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
 .App-footer {
-  background-color: #0f5f8d;
+  position: fixed;
+}
+.App-footer, .App-header {
+  background-color: #55F;
   display: flex;
   flex-direction: column;
-  position: fixed;
   width: 100%;
   bottom: 0;
   font-size: calc(10px + 2vmin);
   color: white;
-}
-
-.container {
-  position: relative;
-  max-width: 800px;
-  margin: 0 auto;
-  background: #fff;
-  border-radius: 3px;
-}
-
-@media (min-width: 769px) {
-  .container {
-    margin: 2.5rem auto;
-  }
 }
 
 /* Result Component */
@@ -48,10 +22,8 @@
 }
 
 /* Quiz Component */
-.answerOptions {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+.answerButton {
+  margin: 5px;
 }
 
 /* QuestionCount Component */
@@ -61,15 +33,9 @@
 }
 
 /* Question Component */
-.question {
-  margin: 0;
-  /* padding: 0.5rem 2.5rem 1.5rem 2.5rem; */
-}
+
 
 /* AnswerOption Component */
-.answerOption {
-  border-top: 1px solid #eee;
-}
 
 .answerOption:hover {
   background-color: #eefbfe;

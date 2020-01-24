@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import './style.css';
-import API from './api/api'
+import axios from 'axios';
 
 import Header from './components/Header'
 import Quiz from './components/Quiz'
 import Result from './components/Result';
-// import quizQuestions from './api/api';
 import Footer from './components/Footer';
 
 
@@ -18,7 +17,6 @@ class App extends Component {
       questionId: 1,
       question: '',
       answerOptions: [],
-      answer: '',
       answersCount: {},
       result: ''
     };
@@ -27,14 +25,26 @@ class App extends Component {
   };
 
   componentDidMount() {
-    API.getDataFromDb();
-    
-    const shuffledAnswerOptions = quizQuestions.map((question) => this.shuffleArray(question.answers));  
-  
-    this.setState({
-      question: quizQuestions[0].question,
-      answerOptions: shuffledAnswerOptions[0]
-    });
+    axios.get('http://localhost:3001/api/getData')
+    .then(response => {
+      const questionArray = response.data;
+      // chooses db entry (question, answers, author, etc.):
+      const randomQuestion = response.data[Math.floor(Math.random()*response.data.length)];
+
+      const currentQuestion = randomQuestion.question
+      const randomizedAnswerOptions = this.shuffleArray(randomQuestion.answers);
+
+
+      this.setState({
+        questionArray: questionArray,
+        question: currentQuestion,
+        answerOptions: randomizedAnswerOptions
+      });
+    })
+    .catch(function(error) {
+      console.log(error);
+    })
+
   };
 
   shuffleArray(array) {
@@ -62,13 +72,14 @@ class App extends Component {
     this.setState({
       counter: counter,
       questionId: questionId,
-      question: quizQuestions[counter].question,
-      answerOptions: quizQuestions[counter].answers,
+      // question: quizQuestions[counter].question,
+      // answerOptions: quizQuestions[counter].answers,
       answer: ''
     });
   }
 
   setUserAnswer(answer) {
+    console.log('we made it as far as setUserAnswer')
     this.setState((state) => ({
       answersCount: {
         ...state.answersCount,
@@ -79,8 +90,10 @@ class App extends Component {
   }
 
   handleAnswerSelected(event) {
+    console.log('we made it as far as handleAnswerSelected')
     this.setUserAnswer(event.currentTarget.value);
-    if (this.state.questionId < quizQuestions.length) {
+    
+    if (this.state.questionId < this.state.questionArray.length) {
       setTimeout(() => this.setNextQuestion(), 300);
     } else {
       setTimeout(() => this.setResults(this.getResults()), 300);
@@ -107,11 +120,10 @@ class App extends Component {
   renderQuiz() {
     return (
       <Quiz
-        answer={this.state.answer}
+        question={this.state.question}
         answerOptions={this.state.answerOptions}
         questionId={this.state.questionId}
-        question={this.state.question}
-        questionTotal={quizQuestions.length}
+        // questionTotal={quizQuestions.length}
         onAnswerSelected={this.handleAnswerSelected}
       />
     );

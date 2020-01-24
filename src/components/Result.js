@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 function Result(props) {
   return (
@@ -8,9 +7,5 @@ function Result(props) {
     </div>
   );
 }
-
-Result.propTypes = {
-  quizResult: PropTypes.string.isRequired,
-};
 
 export default Result;
