@@ -7,6 +7,7 @@
   position: fixed;
 }
 .App-footer, .App-header {
+  padding: 18px;
   background-color: #55F;
   display: flex;
   flex-direction: column;
@@ -16,14 +17,26 @@
   color: white;
 }
 
+/* overrides bootstrap margins */
+.row {
+  margin: 0;
+}
+
 /* Result Component */
 .result {
   padding: 1.5rem 2.5rem;
 }
 
-/* Quiz Component */
+.homeButton {
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  border-radius: 50px;
+}
+
 .answerButton {
   margin: 5px;
+  border-radius: 50px;
 }
 
 /* QuestionCount Component */
@@ -32,16 +45,11 @@
   font-size: 14px;
 }
 
-/* Question Component */
-
-
-/* AnswerOption Component */
-
 .answerOption:hover {
   background-color: #eefbfe;
 }
 
-.radioCustomButton {
+/* .radioCustomButton {
   position: absolute;
   width: auto;
   opacity: 0;
@@ -79,10 +87,10 @@
 
 .radioCustomButton:checked ~ .radioCustomLabel:before {
   content: '';
-  /* background: #8bc53f url(./svg/icon-check.svg) no-repeat; */
   background-size: 27px;
   border-color: #8bc53f;
-}
+} 
+*/
 
 /* Animation */
   /* .fade-enter {

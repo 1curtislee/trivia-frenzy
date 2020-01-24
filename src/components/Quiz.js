@@ -2,7 +2,7 @@ import React from 'react';
 import Question from '../components/Question';
 import QuestionCount from '../components/QuestionCount';
 
-import Button from 'react-bootstrap/Button';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 
 
 function Quiz(props) {
@@ -12,46 +12,47 @@ function Quiz(props) {
     // set index for looping through answers
     let answerKey = number += 1;
     let answerOption = props.answerOptions[number].option;
+    let answerCorrectStatus = props.answerOptions[number].correct;
 
     return (
-      <div className="row" key={answerKey}>
-        <div className="col">
+      <Row key={answerKey}>
+        <Col>
           <Button
             type="button"
             className="btn answerButton"
             variant="info"
             size="lg"
             block
-            
-            value={props.content}
+
+            value={answerCorrectStatus}
             onClick={props.onAnswerSelected}
           >{answerOption}</Button>
-        </div>
-      </div>
+        </Col>
+      </Row>
     );
   }
 
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col">
+    <Container>
+      <Row>
+        <Col>
           <QuestionCount
             counter={props.questionId}
             total={props.questionTotal}
           />
-        </div>
-      </div>
-      <div className="row">
-        <div className="col">
+        </Col>
+      </Row>
+      <Row>
+        <Col>
           <Question content={props.question} />
-        </div>
-      </div>
-      <div className="row">
-        <div className="col">
+        </Col>
+      </Row>
+      <Row>
+        <Col>
           {props.answerOptions.map(renderAnswerOptions)}
-        </div> 
-      </div>
-    </div>
+        </Col> 
+      </Row>
+    </Container>
   );
 }
 

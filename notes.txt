@@ -1,1 +1,5 @@
-handleClick should remove questions from question array
+handleAnswerSelected should remove questions from question array
+handleAnswerSelected should log correct or incorrect, then setState 
+
+todo:
+- 

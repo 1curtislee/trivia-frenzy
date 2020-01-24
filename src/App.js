@@ -78,26 +78,33 @@ class App extends Component {
     });
   }
 
-  setUserAnswer(answer) {
-    console.log('we made it as far as setUserAnswer')
-    this.setState((state) => ({
-      answersCount: {
-        ...state.answersCount,
-        [answer]: (state.answersCount[answer] || 0) + 1
-      },
-      answer: answer
-    }));
-  }
+
+  // setUserAnswer(answer) {
+  //   console.log('we made it as far as setUserAnswer')
+  //   this.setState((state) => ({
+  //     answersCount: {
+  //       ...state.answersCount,
+  //       [answer]: (state.answersCount[answer] || 0) + 1
+  //     },
+  //     answer: answer
+  //   }));
+  // }
 
   handleAnswerSelected(event) {
-    console.log('we made it as far as handleAnswerSelected')
-    this.setUserAnswer(event.currentTarget.value);
-    
-    if (this.state.questionId < this.state.questionArray.length) {
-      setTimeout(() => this.setNextQuestion(), 300);
+    if (event.currentTarget.value === "true") {
+      console.log('correct!')
     } else {
-      setTimeout(() => this.setResults(this.getResults()), 300);
+      console.log('nope, sorry :/')
     }
+
+    // if (this.state.questionId < this.state.questionArray.length) {
+    //   setTimeout(() => this.setNextQuestion(), 300);
+    // } else {
+    //   setTimeout(() => this.setResults(this.getResults()), 300);
+    // }
+    
+    // this.setUserAnswer(event.currentTarget.value);
+    
   }
 
   getResults() {
