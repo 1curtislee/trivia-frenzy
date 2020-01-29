@@ -2,4 +2,23 @@ handleAnswerSelected should remove questions from question array
 handleAnswerSelected should log correct or incorrect, then setState 
 
 todo:
-- 
+- change answer button colors when option is chosen
+    - on handleAnswerSelected, render quiz with different color props for answers
+
+    if answered {
+        style = {
+            if (correctStatus) {
+                style = {
+                    background-color: green
+                }
+            } else {
+                style = {
+                    background-color: red
+                }
+            }
+        }
+    } else {
+        style = {
+            background-color: blue
+        }
+    }

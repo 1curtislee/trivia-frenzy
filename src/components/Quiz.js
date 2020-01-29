@@ -14,13 +14,27 @@ function Quiz(props) {
     let answerOption = props.answerOptions[number].option;
     let answerCorrectStatus = props.answerOptions[number].correct;
 
+    const renderButtonColor = () => {
+      console.log('props.guessed', props.guessed)
+      if (props.guessed) {
+        console.log('props.guessed === true')
+        if (answerCorrectStatus) {
+          return "green"
+        } else if (!answerCorrectStatus) {
+          return "red"
+        } else {
+          return "blue"
+        }
+      }
+    }
+
     return (
       <Row key={answerKey}>
         <Col>
           <Button
             type="button"
             className="btn answerButton"
-            variant="info"
+            style={{ backgroundColor: renderButtonColor() }}
             size="lg"
             block
 

@@ -15,7 +15,9 @@ class App extends Component {
     this.state = {
       counter: 0,
       questionId: 1,
+      questionArray: [],
       question: '',
+      guessed: false,
       answerOptions: [],
       answersCount: {},
       result: ''
@@ -38,7 +40,8 @@ class App extends Component {
       this.setState({
         questionArray: questionArray,
         question: currentQuestion,
-        answerOptions: randomizedAnswerOptions
+        answerOptions: randomizedAnswerOptions,
+        guessed: false
       });
     })
     .catch(function(error) {
@@ -91,10 +94,13 @@ class App extends Component {
   // }
 
   handleAnswerSelected(event) {
+    // setTimeout(() => this.renderUnguessedQuiz(), 300);
+    this.renderGuessedQuiz();
+
     if (event.currentTarget.value === "true") {
-      console.log('correct!')
+      console.log('correct!');
     } else {
-      console.log('nope, sorry :/')
+      console.log('nope, sorry :/');
     }
 
     // if (this.state.questionId < this.state.questionArray.length) {
@@ -124,13 +130,31 @@ class App extends Component {
     }
   }
 
-  renderQuiz() {
+  renderGuessedQuiz() {
+    console.log('rendering GuessedQuiz')
     return (
       <Quiz
         question={this.state.question}
         answerOptions={this.state.answerOptions}
         questionId={this.state.questionId}
-        // questionTotal={quizQuestions.length}
+        questionTotal={this.state.questionArray.length}
+
+        guessed={true}
+        onAnswerSelected={this.handleAnswerSelected}
+      />
+    )
+  }
+
+  renderUnguessedQuiz() {
+    console.log('rendering UnguessedQuiz')
+    return (
+      <Quiz
+        question={this.state.question}
+        answerOptions={this.state.answerOptions}
+        questionId={this.state.questionId}
+        questionTotal={this.state.questionArray.length}
+
+        guessed={false}
         onAnswerSelected={this.handleAnswerSelected}
       />
     );
@@ -146,7 +170,8 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        {this.state.result ? this.renderResult() : this.renderQuiz()}
+        {this.renderUnguessedQuiz()}
+        {/* {this.state.result ? this.renderResult() : this.renderGuessedQuiz()} */}
         <Footer />
       </div>
     )
