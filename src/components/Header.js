@@ -1,4 +1,10 @@
 import React from 'react';
+import {
+  // BrowserRouter as Router,
+  // Switch,
+  // Route,
+  Link
+} from "react-router-dom";
 import { Button, Row, Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome } from '@fortawesome/free-solid-svg-icons'
@@ -8,7 +14,7 @@ function Header() {
     <div className="App-header">
       <Row>
         <Col xs={3}>
-          <a href="/">
+          <Link to="/">
             <Button
               type="button"
               className="btn homeButton text-center"
@@ -16,7 +22,7 @@ function Header() {
             >
               <FontAwesomeIcon icon={faHome} size="lg" />
             </Button>
-          </a>
+          </Link>
         </Col>
         
         <Col 

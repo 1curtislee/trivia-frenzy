@@ -15,16 +15,14 @@ function Quiz(props) {
     let answerCorrectStatus = props.answerOptions[number].correct;
 
     const renderButtonColor = () => {
-      console.log('props.guessed', props.guessed)
       if (props.guessed) {
-        console.log('props.guessed === true')
         if (answerCorrectStatus) {
-          return "green"
+          return '#41cf5d'
         } else if (!answerCorrectStatus) {
-          return "red"
-        } else {
-          return "blue"
+          return '#db5262'
         }
+      } else {
+        return '#15a2b7'
       }
     }
 
@@ -48,23 +46,25 @@ function Quiz(props) {
 
   return (
     <Container>
-      <Row>
-        <Col>
-          <QuestionCount
-            counter={props.questionId}
-            total={props.questionTotal}
-          />
-        </Col>
-      </Row>
+      <br />
       <Row>
         <Col>
           <Question content={props.question} />
         </Col>
+        
       </Row>
       <Row>
         <Col>
           {props.answerOptions.map(renderAnswerOptions)}
         </Col> 
+      </Row>
+      <Row>
+        <Col>
+          <QuestionCount
+            counter={props.questionId}
+            total={props.quizLength}
+          />
+        </Col>
       </Row>
     </Container>
   );

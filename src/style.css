@@ -8,7 +8,7 @@
 }
 .App-footer, .App-header {
   padding: 18px;
-  background-color: #55F;
+  background-color: #630fce;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -37,6 +37,7 @@
 .answerButton {
   margin: 5px;
   border-radius: 50px;
+  border: none !important;
 }
 
 /* QuestionCount Component */

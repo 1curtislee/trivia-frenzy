@@ -2,10 +2,18 @@ import React, { Component } from 'react';
 import './style.css';
 import axios from 'axios';
 
-import Header from './components/Header'
-import Quiz from './components/Quiz'
+import Header from './components/Header';
+import Home from './components/Home';
+import Quiz from './components/Quiz';
 import Result from './components/Result';
 import Footer from './components/Footer';
+
+import {
+  BrowserRouter as Router,
+  // Switch,
+  Route,
+  // Link
+} from "react-router-dom";
 
 
 class App extends Component {
@@ -14,10 +22,12 @@ class App extends Component {
   
     this.state = {
       counter: 0,
-      questionId: 1,
+      questionId: null,
       questionArray: [],
+      questionIndex: 0,
       question: '',
-      guessed: false,
+      quizLength: 10,
+      guessed: null,
       answerOptions: [],
       answersCount: {},
       result: ''
@@ -29,26 +39,32 @@ class App extends Component {
   componentDidMount() {
     axios.get('http://localhost:3001/api/getData')
     .then(response => {
-      const questionArray = response.data;
-      // chooses db entry (question, answers, author, etc.):
-      const randomQuestion = response.data[Math.floor(Math.random()*response.data.length)];
-
-      const currentQuestion = randomQuestion.question
-      const randomizedAnswerOptions = this.shuffleArray(randomQuestion.answers);
-
-
-      this.setState({
-        questionArray: questionArray,
-        question: currentQuestion,
-        answerOptions: randomizedAnswerOptions,
-        guessed: false
-      });
+      this.setupQuestion(response.data);
     })
     .catch(function(error) {
       console.log(error);
     })
-
   };
+
+  setupQuestion(data) {
+    let questionArray = data;
+
+    let index = Math.floor(Math.random()*data.length)
+    let randomQuestion = data[index];
+    let currentQuestion = randomQuestion.question
+    let randomizedAnswerOptions = this.shuffleArray(randomQuestion.answers);
+
+    let questionId = this.state.questionId + 1;
+
+    this.setState({
+      questionArray: questionArray,
+      questionIndex: index,
+      question: currentQuestion,
+      questionId: questionId,
+      answerOptions: randomizedAnswerOptions,
+      guessed: false
+    });
+  } 
 
   shuffleArray(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -69,49 +85,22 @@ class App extends Component {
     return array;
   };
 
-  setNextQuestion() {
-    const counter = this.state.counter + 1;
-    const questionId = this.state.questionId + 1;
-    this.setState({
-      counter: counter,
-      questionId: questionId,
-      // question: quizQuestions[counter].question,
-      // answerOptions: quizQuestions[counter].answers,
-      answer: ''
-    });
-  }
-
-
-  // setUserAnswer(answer) {
-  //   console.log('we made it as far as setUserAnswer')
-  //   this.setState((state) => ({
-  //     answersCount: {
-  //       ...state.answersCount,
-  //       [answer]: (state.answersCount[answer] || 0) + 1
-  //     },
-  //     answer: answer
-  //   }));
-  // }
-
   handleAnswerSelected(event) {
-    // setTimeout(() => this.renderUnguessedQuiz(), 300);
-    this.renderGuessedQuiz();
+    this.setState({
+      guessed: true
+    })
 
     if (event.currentTarget.value === "true") {
       console.log('correct!');
     } else {
       console.log('nope, sorry :/');
     }
-
-    // if (this.state.questionId < this.state.questionArray.length) {
-    //   setTimeout(() => this.setNextQuestion(), 300);
-    // } else {
-    //   setTimeout(() => this.setResults(this.getResults()), 300);
-    // }
     
-    // this.setUserAnswer(event.currentTarget.value);
-    
-  }
+    setTimeout(() => {
+      this.state.questionArray.splice(this.state.questionIndex, 1);
+      this.setupQuestion(this.state.questionArray)
+    }, 2000);
+  };
 
   getResults() {
     const answersCount = this.state.answersCount;
@@ -129,36 +118,6 @@ class App extends Component {
       this.setState({ result: 'Undetermined' });
     }
   }
-
-  renderGuessedQuiz() {
-    console.log('rendering GuessedQuiz')
-    return (
-      <Quiz
-        question={this.state.question}
-        answerOptions={this.state.answerOptions}
-        questionId={this.state.questionId}
-        questionTotal={this.state.questionArray.length}
-
-        guessed={true}
-        onAnswerSelected={this.handleAnswerSelected}
-      />
-    )
-  }
-
-  renderUnguessedQuiz() {
-    console.log('rendering UnguessedQuiz')
-    return (
-      <Quiz
-        question={this.state.question}
-        answerOptions={this.state.answerOptions}
-        questionId={this.state.questionId}
-        questionTotal={this.state.questionArray.length}
-
-        guessed={false}
-        onAnswerSelected={this.handleAnswerSelected}
-      />
-    );
-  }
   
   renderResult() {
     return (
@@ -169,10 +128,24 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header />
-        {this.renderUnguessedQuiz()}
-        {/* {this.state.result ? this.renderResult() : this.renderGuessedQuiz()} */}
-        <Footer />
+        <Router>
+          <Header />
+          <Route exact path='/'>
+            <Home />
+          </Route>
+          <Route exact path='/quiz'>
+            <Quiz
+              question={this.state.question}
+              answerOptions={this.state.answerOptions}
+              guessed={this.state.guessed}
+              onAnswerSelected={this.handleAnswerSelected}
+              questionId={this.state.questionId}
+              quizLength={this.state.quizLength}
+            />
+          </Route>
+          {/* {this.state.result ? this.renderResult() : this.renderGuessedQuiz()} */}
+          <Footer />
+        </Router>
       </div>
     )
   }
