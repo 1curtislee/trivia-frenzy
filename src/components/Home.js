@@ -1,16 +1,9 @@
 import React from 'react';
-import {
-  // BrowserRouter as Router,
-  // Switch,
-  // Route,
-  Link
-} from "react-router-dom";
-import { Button, DropdownButton, Dropdown /* , Row, Col */ } from 'react-bootstrap';
+import { Link } from "react-router-dom";
+import { Button, DropdownButton, Dropdown } from 'react-bootstrap';
 
 function Home(props) {
   // need logic to forward a chosen category to the quiz app
-
-
 
   return (
     <div>

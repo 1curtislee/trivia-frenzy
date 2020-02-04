@@ -27,17 +27,20 @@
   padding: 1.5rem 2.5rem;
 }
 
+.btn {
+  border-radius: 50px;
+  border: none !important;
+}
+
 .homeButton {
   width: 60px;
   height: 60px;
   text-align: center;
-  border-radius: 50px;
 }
 
 .answerButton {
   margin: 5px;
-  border-radius: 50px;
-  border: none !important;
+  
 }
 
 /* QuestionCount Component */

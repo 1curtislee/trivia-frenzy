@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import { Button, Row, Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome } from '@fortawesome/free-solid-svg-icons'
+import { faHome, faPlus } from '@fortawesome/free-solid-svg-icons'
 
 function Header() {
   return (
@@ -26,11 +26,26 @@ function Header() {
         </Col>
         
         <Col 
-          xs={{ span:4, offset:1 }}
+          xs={{ span:4 }}
           md={{ span:2, offset:2 }}
           className="text-center"
         >
           <h2>Trivia Frenzy</h2>
+        </Col>
+
+        <Col
+          xs={{ span:4, offset:1 }}
+          md={{ span:2, offset:2 }}
+        >
+          <Link to="/add">
+            <Button
+              type="button"
+              className="btn text-center"
+              variant="info"
+            >
+              <FontAwesomeIcon icon={faPlus} size="lg" /> &nbsp; Add Questions...
+            </Button>
+          </Link>
         </Col>
       </Row>
     </div>

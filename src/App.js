@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import Header from './components/Header';
 import Home from './components/Home';
+import Add from './components/Add';
 import Quiz from './components/Quiz';
 import Result from './components/Result';
 import Footer from './components/Footer';
@@ -142,6 +143,9 @@ class App extends Component {
               questionId={this.state.questionId}
               quizLength={this.state.quizLength}
             />
+          </Route>
+          <Route exact path='/add'>
+            <Add />
           </Route>
           {/* {this.state.result ? this.renderResult() : this.renderGuessedQuiz()} */}
           <Footer />
