@@ -10,6 +10,11 @@ const app = express();
 app.use(cors());
 const router = express.Router();
 
+app.use(express.static(path.join(__dirname, 'build')));
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
 // this is our MongoDB database
 const dbRoute =
   'mongodb://heroku_81hwr9dc:b4h84mp6gl3n7enkpdgiko35qu@ds133252.mlab.com:33252/heroku_81hwr9dc'
