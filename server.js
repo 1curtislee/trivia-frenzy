@@ -5,15 +5,10 @@ const bodyParser = require('body-parser');
 
 const QuestionModel = require('./Model');
 
-const API_PORT = 3001;
+const API_PORT = process.env.PORT || 3001;
 const app = express();
 app.use(cors());
 const router = express.Router();
-
-app.use(express.static(path.join(__dirname, 'build')));
-app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
 
 // this is our MongoDB database
 const dbRoute =

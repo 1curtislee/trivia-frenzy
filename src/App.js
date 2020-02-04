@@ -38,7 +38,9 @@ class App extends Component {
   };
 
   componentDidMount() {
-    axios.get('http://localhost:3001/api/getData')
+    const baseUrl = process.env.baseURL || "http://localhost:3001"
+
+    axios.get(baseUrl + '/api/getData')
     .then(response => {
       this.setupQuestion(response.data);
     })
