@@ -11,9 +11,7 @@ function Home(props) {
       <h2>Welcome to Trivia Frenzy!</h2>
 
       <DropdownButton id="dropdown-basic-button" title="Choose a category...">
-        <Dropdown.Item href="#/action-1">Category1</Dropdown.Item>
-        <Dropdown.Item href="#/action-2">Category2</Dropdown.Item>
-        <Dropdown.Item href="#/action-3">Category3</Dropdown.Item>
+        <Dropdown.Item href="#/action-1">Coming soon...</Dropdown.Item>
       </DropdownButton>
       <br />
       <Link to="/quiz">

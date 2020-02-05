@@ -45,11 +45,15 @@ router.get('/getData', (req, res) => {
 // this is our update method
 // this method overwrites existing data in our database
 router.post('/updateData', (req, res) => {
+  let newQuestion = new QuestionModel(req.body)
+
   const { id, update } = req.body;
   Data.findByIdAndUpdate(id, update, (err) => {
     if (err) return res.json({ success: false, error: err });
     return res.json({ success: true });
   });
+
+  QuestionModel.updateOne(() => {})
 });
 
 // this is our delete method

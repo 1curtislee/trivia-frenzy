@@ -1,65 +1,90 @@
 import React from 'react';
-import { Form, Button, Container, Col } from 'react-bootstrap';
+import { Form, Button, Col, Row } from 'react-bootstrap';
 
 function Add(props) {
-  //onSubmit logic for adding to the database
+  function onSubmit(event) {
+    event.preventDefault();
+
+    console.log(event.target);
+  }
   
   return (
-    <Container>
+    <div>
       <br/>
-      
-      <Form>
-        <Form.Row>
-          <Form.Group as={Col} controlId="formGridEmail">
-            <Form.Label>Email</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" />
-          </Form.Group>
-
-          <Form.Group as={Col} controlId="formGridPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" />
-          </Form.Group>
-        </Form.Row>
-
-        <Form.Group controlId="formGridAddress1">
-          <Form.Label>Address</Form.Label>
-          <Form.Control placeholder="1234 Main St" />
+      <h2>Add a question...</h2>
+      <br/>
+      <Form onSubmit={onSubmit}>
+        <Form.Group as={Row} id="formQuestion">
+          <Form.Label column sm="2">Question</Form.Label>
+          <Col sm="8">
+            <Form.Control
+              type="input"
+              placeholder="How far is the earth from the sun?" />
+          </Col>
         </Form.Group>
-
-        <Form.Group controlId="formGridAddress2">
-          <Form.Label>Address 2</Form.Label>
-          <Form.Control placeholder="Apartment, studio, or floor" />
-        </Form.Group>
-
-        <Form.Row>
-          <Form.Group as={Col} controlId="formGridCity">
-            <Form.Label>City</Form.Label>
+        <br/>
+        <Form.Group as={Row} id="formOption1">
+          <Form.Label column sm="2">Option 1</Form.Label>
+          <Col sm="6">
             <Form.Control />
-          </Form.Group>
-
-          <Form.Group as={Col} controlId="formGridState">
-            <Form.Label>State</Form.Label>
-            <Form.Control as="select">
-              <option>Choose...</option>
-              <option>...</option>
-            </Form.Control>
-          </Form.Group>
-
-          <Form.Group as={Col} controlId="formGridZip">
-            <Form.Label>Zip</Form.Label>
-            <Form.Control />
-          </Form.Group>
-        </Form.Row>
-
-        <Form.Group id="formGridCheckbox">
-          <Form.Check type="checkbox" label="Check me out" />
+          </Col>
+          <Col sm='2'>
+            <Form.Check 
+              type="radio"
+              label="Correct"
+              name="correct"
+            />
+          </Col>
         </Form.Group>
-
+        <br/>
+        <Form.Group as={Row} id="formOption2">
+          <Form.Label column sm="2">Option 2</Form.Label>
+          <Col sm="6">
+            <Form.Control />
+          </Col>
+          <Col sm='2'>
+            <Form.Check 
+              type="radio"
+              label="Correct"
+              name="correct"
+            />
+          </Col>
+        </Form.Group>
+        <br/>
+        <Form.Group as={Row} id="formOption3">
+          <Form.Label column sm="2">Option 3</Form.Label>
+          <Col sm="6">
+            <Form.Control />
+          </Col>
+          <Col sm='2'>
+            <Form.Check 
+              type="radio"
+              label="Correct"
+              name="correct"
+            />
+          </Col>
+        </Form.Group>
+        <br/>
+        <Form.Group as={Row} id="formOption4">
+          <Form.Label column sm="2">Option 4</Form.Label>
+          <Col sm="6">
+            <Form.Control />
+          </Col>
+          <Col sm='2'>
+            <Form.Check
+              type="radio"
+              label="Correct"
+              name="correct"
+            />
+          </Col>
+        </Form.Group>
+        <br/>        
         <Button variant="primary" type="submit">
           Submit
         </Button>
+
       </Form>
-    </Container>
+    </div>
   );
 }
 
