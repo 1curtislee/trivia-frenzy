@@ -4,6 +4,10 @@ import { Button, DropdownButton, Dropdown } from 'react-bootstrap';
 
 function Home(props) {
   // need logic to forward a chosen category to the quiz app
+  function onClick() {
+    console.log('category chosen');
+  }
+
 
   return (
     <div>
@@ -19,6 +23,7 @@ function Home(props) {
           type="button"
           className="btn homeButton text-center"
           variant="info"
+          onClick={onClick()}
         >GO!
         </Button>
       </Link>

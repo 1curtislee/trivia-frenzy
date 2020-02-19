@@ -9,12 +9,7 @@ import Quiz from './components/Quiz';
 import Result from './components/Result';
 import Footer from './components/Footer';
 
-import {
-  BrowserRouter as Router,
-  // Switch,
-  Route,
-  // Link
-} from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 
 class App extends Component {
@@ -39,6 +34,7 @@ class App extends Component {
 
   componentDidMount() {
     const baseUrl = process.env.baseURL || "http://localhost:3001"
+    console.log(baseUrl);
 
     axios.get(baseUrl + '/api/getData')
     .then(response => {
