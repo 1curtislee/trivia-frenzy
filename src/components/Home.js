@@ -4,8 +4,18 @@ import { Button, DropdownButton, Dropdown } from 'react-bootstrap';
 
 function Home(props) {
   // need logic to forward a chosen category to the quiz app
+  
+  
   function onClick() {
     console.log('category chosen');
+
+    // let category = props.category;
+
+    /* 
+    notes:
+      - need an ajax call for db collections
+      - 
+    */
   }
 
 
@@ -14,7 +24,7 @@ function Home(props) {
       <br/>
       <h2>Welcome to Trivia Frenzy!</h2>
 
-      <DropdownButton id="dropdown-basic-button" title="Choose a category...">
+      <DropdownButton id="dropdown-basic-button" title="Choose a collection...">
         <Dropdown.Item href="#/action-1">Coming soon...</Dropdown.Item>
       </DropdownButton>
       <br />

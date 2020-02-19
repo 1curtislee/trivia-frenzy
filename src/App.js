@@ -18,6 +18,7 @@ class App extends Component {
   
     this.state = {
       counter: 0,
+      collection: '',
       questionId: null,
       questionArray: [],
       questionIndex: 0,
@@ -34,7 +35,6 @@ class App extends Component {
 
   componentDidMount() {
     const baseUrl = process.env.baseURL || "http://localhost:3001"
-    console.log(baseUrl);
 
     axios.get(baseUrl + '/api/getData')
     .then(response => {
@@ -130,7 +130,10 @@ class App extends Component {
         <Router>
           <Header />
           <Route exact path='/'>
-            <Home />
+            <Home 
+              category={this.state.collection}
+            
+            />
           </Route>
           <Route exact path='/quiz'>
             <Quiz
@@ -145,7 +148,6 @@ class App extends Component {
           <Route exact path='/add'>
             <Add />
           </Route>
-          {/* {this.state.result ? this.renderResult() : this.renderGuessedQuiz()} */}
           <Footer />
         </Router>
       </div>

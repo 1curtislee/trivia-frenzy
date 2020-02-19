@@ -44,16 +44,17 @@ router.get('/getData', (req, res) => {
 
 // this is our update method
 // this method overwrites existing data in our database
-router.post('/updateData', (req, res) => {
+router.post('/putData', (req, res) => {
   let newQuestion = new QuestionModel(req.body)
+  newQuestion.save();
 
-  const { id, update } = req.body;
-  Data.findByIdAndUpdate(id, update, (err) => {
-    if (err) return res.json({ success: false, error: err });
-    return res.json({ success: true });
-  });
+  // const { id, update } = req.body;
+  // Data.findByIdAndUpdate(id, update, (err) => {
+  //   if (err) return res.json({ success: false, error: err });
+  //   return res.json({ success: true });
+  // });
 
-  QuestionModel.updateOne(() => {})
+  // QuestionModel.updateOne(() => {})
 });
 
 // this is our delete method
@@ -66,28 +67,28 @@ router.delete('/deleteData', (req, res) => {
   });
 });
 
-// this is our create methid
+// this is our create method
 // this method adds new data in our database
-router.post('/putData', (req, res) => {
-  res.send('post route hit!')
+// router.post('/putData', (req, res) => {
+//   res.send('post route hit!')
   
-  let data = new QuestionModel();
+//   let data = new QuestionModel();
 
-  const { id, message } = req.body;
+//   const { id, message } = req.body;
 
-  if ((!id && id !== 0) || !message) {
-    return res.json({
-      success: false,
-      error: 'INVALID INPUTS',
-    });
-  }
-  data.question = question;
-  data.id = id;
-  data.save((err) => {
-    if (err) return res.json({ success: false, error: err });
-    return res.json({ success: true });
-  });
-});
+//   if ((!id && id !== 0) || !message) {
+//     return res.json({
+//       success: false,
+//       error: 'INVALID INPUTS',
+//     });
+//   }
+//   data.question = question;
+//   data.id = id;
+//   data.save((err) => {
+//     if (err) return res.json({ success: false, error: err });
+//     return res.json({ success: true });
+//   });
+// });
 
 // append /api for our http requests
 app.use('/api', router);

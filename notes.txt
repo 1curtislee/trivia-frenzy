@@ -1,11 +1,8 @@
 
-[[[ this.setState triggers a new render! ]]]
-
-handleAnswerSelected should remove questions from question array
 handleAnswerSelected should log correct or incorrect, then setState 
 
 todo:
-- 
+- check if any correct answers, if not alert no correct chosen
+- link collection drop down (Home) to chosen questions (Quiz)
 
 problems:
-- 
